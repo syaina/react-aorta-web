@@ -62,10 +62,8 @@ export default function FormLogin(props) {
 
     return (
         <Fragment>
-            {/* <Alert severity="success">
-                <AlertTitle>Berhasil!</AlertTitle>
-                Akunmu berhasil terdaftar. Silakan login!
-            </Alert> */}
+            <Alert variant="filled" severity="success">Akun Berhasil terdaftar. Silakan login!</Alert>
+            <Alert variant="filled" severity="error">Akun sudah terdaftar. Gunakan email yang lain.</Alert>
 
             <form onSubmit={handleSubmit(onSubmit)}  className={classes.root}>
                 <div>

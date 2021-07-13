@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap')
+
+* 
+    padding: 0
+    margin: 0
+
+@import spacing.utilities
+
+$white: #ffffff
+$black: #000000
+$dark-blue-grey: #0b1d2a
+$butterscotch: #ffca39
+$dark-blue-grey-0: rgba(11, 29, 42, 0)
+$font-1: 'Open Sans', sans-serif
+$font-2: 'Roboto', sans-serif
+$font-md: 1rem
+$font-sm: 1rem * 0.875
+
+body
+    font-family: $font-1
+    font-size: $font-md
+
+header
+    margin: 24px auto 
+    display: grid
+    grid-template-columns: 150px 1fr auto
+    grid-template-rows: 1fr
+    max-width: 1280px
+    font-weight: 600
+
+    ul 
+        display: flex
+        flex-direction: columns
+
+        li
+            justify-content: space-around
+            list-style: none
+            padding: 0 16px
+            line-height: 39px
+            vertical-align: middle
+a
+    text-decoration: none
+    color: inherit
+
+.link-btn 
+    background: $butterscotch
+    vertical-align: middle
+    padding: 10px 20px
+    border-radius: 20px
+    font-size: $font-sm
+    
+.grid
+    display: grid
+    grid-template-columns: 1fr 1fr 
+        
+h1
+    font-size: 2.5rem 
+
+h2
+    font-size: 2rem
+
+h3
+    font-size: 1.75rem
+
+h4
+    font-size: 1.5rem
+
+.title
+    font-family: $font-2
+    color: $dark-blue-grey
+    font-size: 3.5rem
+    font-weight: 900
+
+.font-grey
+    color: $dark-blue-grey
+
+.font-light
+    font-weight: 100
+
+.p-home 
+    color: $black
+    line-height: 1.5
+    text-align: justify
+    font-family: $font-1
+
+.link-btn-home
+    padding: 10px 40px
+    font-weight: 600
+    font-size: 1rem
+
+.center
+    text-align: center
+
+.container
+    max-width: 1140px
+    margin: auto
+
+.color-
