@@ -399,6 +399,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
+  color: #292929;
 }
 
 header {
@@ -443,6 +444,7 @@ a {
   padding: 10px 20px;
   border-radius: 20px;
   font-size: 0.875rem;
+  font-weight: 600;
 }
 
 .grid {
@@ -450,6 +452,11 @@ a {
   display: grid;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
+}
+
+.grid-4 {
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 h1 {
@@ -468,6 +475,14 @@ h4 {
   font-size: 1.5rem;
 }
 
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
 .title {
   font-family: "Roboto", sans-serif;
   color: #0b1d2a;
@@ -484,7 +499,7 @@ h4 {
 }
 
 .p-home {
-  color: #000000;
+  color: #292929;
   line-height: 1.5;
   text-align: justify;
   font-family: "Open Sans", sans-serif;
@@ -503,5 +518,68 @@ h4 {
 .container {
   max-width: 1140px;
   margin: auto;
+}
+
+.bg-dark-blue {
+  background-color: #0b1d2a;
+}
+
+.bg-white {
+  background: #ffffff;
+}
+
+.bg-butterscotch {
+  background: #ffca39;
+}
+
+.font-white {
+  color: #ffffff;
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.tab-like-section {
+  background: #ffffff;
+  border-radius: 0 0 0 20px;
+  padding-bottom: 10px;
+  margin-bottom: -20px;
+  width: 100%;
+}
+
+.tab-style {
+  padding: 0px 4rem;
+  padding-right: 2rem;
+  width: 250px;
+  margin: 0;
+  border-radius: 0 20px 0 0;
+}
+
+.question-box {
+  border-radius: 20px;
+  padding: 3rem;
+}
+
+.container-question-box {
+  padding-bottom: 30px;
+  border-radius: 20px;
+}
+
+.card {
+  border-radius: 20px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.card .card-img-container img {
+  width: 100%;
+  height: 100%;
 }
 /*# sourceMappingURL=main.style.css.map */
