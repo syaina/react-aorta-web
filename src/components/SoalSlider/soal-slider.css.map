@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACR,GAAG,EAAE,IAAI;EACT,SAAS,EAAE,gBAAgB;EAC3B,IAAI,EAAE,GAAG;EACT,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,EAAE;CAGb;;AAEF,AAAA,WAAW,CAAC;EACR,GAAG,EAAE,IAAI;EACT,SAAS,EAAE,gBAAgB;EAC3B,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,EAAE;CAGb",
+    "sources": [
+        "soal-slider.sass"
+    ],
+    "names": [],
+    "file": "soal-slider.css"
+}

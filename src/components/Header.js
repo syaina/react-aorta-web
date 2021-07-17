@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Header (props) {
     const [isHamburger, setHamburger] = useState(false);
@@ -9,14 +10,14 @@ function Header (props) {
 
     return (
         <header>
-            <img src="../logo.png" alt="AORTA" />
+            <Link to="/"><img src="../logo.png" alt="AORTA" /></Link>
             <ul>
-                <li>Profil Aorta</li>
-                <li>Profil Pengajar</li>
-                <li>Daftar Kelas</li>
-                <li>Latihan Soal</li>
+                <li><Link to="/profil-aorta">Profil Aorta</Link></li>
+                <li><Link to="/profil-pengajar">Profil Pengajar</Link></li>
+                <li><Link to="/daftar-kelas">Daftar Kelas</Link></li>
+                <li><Link to="/latihan-soal">Latihan Soal</Link></li>
             </ul>
-            <a class="link-btn" href="/">Login/Buat Akun</a>
+            <Link className="link-btn" to="/login">Login/Buat Akun</Link>
         </header>
 
     );

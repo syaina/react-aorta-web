@@ -3,13 +3,10 @@ import FormLogin from '../components/FormLogin';
 
 export default function Login() {
     return (
-        <div id="main">
-            <div id="content" className="width--medium">
-                <div className="container bg-shadow">
-                    <h2 className="text--center">Masuk ke</h2>
-                    <div className="logo-wrapper text--center">
-                        <img src="../image/Logo Loak.png" alt=""/>
-                    </div>
+        <div>
+            <div className="container center bg-butterscotch">
+                <div className="bg-white">
+                    <h3 className="font-secondary">Masuk ke</h3>
                     <FormLogin />
                 </div>
             </div>

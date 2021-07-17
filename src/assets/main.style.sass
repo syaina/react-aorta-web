@@ -139,7 +139,7 @@ h6
 
 .question-box
     border-radius: 20px
-    padding: 3rem
+
 
 .container-question-box
     padding-bottom: 30px
@@ -158,3 +158,46 @@ h6
     h5
         color: 
 
+.slider-img-container
+    width: 100%
+    padding-bottom: 66.6%
+    // 4:3 = 75%
+    // 3:2 = 66.6%
+    // 16:9 = 56.25%
+    position: relative
+    cursor: pointer
+    img 
+        width: 100%
+        object-fit: cover
+        height: 100%
+        position: absolute
+
+.testimoni-card-container
+    padding: 0
+    .testimoni-card
+        margin: 0 1rem
+        text-align: justify
+        padding: 2rem
+        box-shadow: 5.5px 4px 6.5px -3.5px rgba(0, 0, 0, 0.25)
+        .card-img-container
+            width: 150px
+            height: 150px
+            background: white
+            border-radius: 50%
+            margin: auto
+            object-fit: cover
+            background-repeat: no-repeat
+            background-size: cover
+            background-position: center
+        p
+            margin-top: 2rem
+        
+.font-small
+    font-size: $font-sm
+
+.font-primary
+    font-family: $font-1
+
+.font-secondary
+    font-family: $font-2
+//@import imports
