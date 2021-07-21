@@ -528,7 +528,7 @@ h6 {
   background: #ffffff;
 }
 
-.bg-butterscotch {
+.bg-primary {
   background: #ffca39;
 }
 
@@ -636,5 +636,53 @@ h6 {
 
 .font-secondary {
   font-family: "Roboto", sans-serif;
+}
+
+.font-color-dark-blue {
+  color: #0b1d2a;
+}
+
+.font-color-black {
+  color: #292929;
+}
+
+.font-weight-normal {
+  font-weight: normal;
+}
+
+.btn {
+  outline: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.btn-primary {
+  background: #ffca39;
+  color: #292929;
+}
+
+.btn-primary:hover {
+  background: #ffbc06;
+}
+
+.border-primary {
+  border: 2px solid #ffca39;
+  border-radius: 20px;
+}
+
+.width-auto {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.link {
+  text-decoration: underline;
 }
 /*# sourceMappingURL=main.style.css.map */

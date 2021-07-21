@@ -11,6 +11,8 @@ $white: #ffffff
 $black: #292929
 $dark-blue-grey: #0b1d2a
 $butterscotch: #ffca39
+$primary: $butterscotch
+$secondary: $dark-blue-grey
 $dark-blue-grey-0: rgba(11, 29, 42, 0)
 $font-1: 'Open Sans', sans-serif
 $font-2: 'Roboto', sans-serif
@@ -45,7 +47,7 @@ a
     color: inherit
 
 .link-btn 
-    background: $butterscotch
+    background: $primary
     vertical-align: middle
     padding: 10px 20px
     border-radius: 20px
@@ -113,8 +115,8 @@ h6
 .bg-white
     background: $white
 
-.bg-butterscotch
-    background: $butterscotch
+.bg-primary
+    background: $primary
 
 .font-white
     color: $white
@@ -200,4 +202,45 @@ h6
 
 .font-secondary
     font-family: $font-2
-//@import imports
+
+.font-color-dark-blue
+    color: $dark-blue-grey
+
+.font-color-black
+    color: $black
+
+.font-weight-normal
+    font-weight: normal
+
+.btn 
+    outline: none
+    background: none
+    border: none
+    cursor: pointer
+    padding: 12px
+    font-size: $font-md
+    border-radius: 20px
+    font-weight: bold
+    margin: 0
+    
+.btn-primary 
+    background: $primary
+    color: $black
+
+    &:hover
+        background: darken($primary, 10%)
+
+.border-primary
+    border: 2px solid $primary 
+    border-radius: 20px
+
+.width-auto
+    width: 100%
+    max-width: 500px
+    margin: auto
+
+.link
+    text-decoration: underline
+    
+
+@import imports

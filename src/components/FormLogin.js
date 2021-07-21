@@ -1,29 +1,30 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import axios from "axios";
 
-import AuthService from '../services/auth.service';
+import SubmitBtn from './SubmitBtn';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-import SubmitBtn from './SubmitBtn';
+import AuthService from '../services/auth.service';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
         margin: theme.spacing(2),
-        width: '300px',
+        width: '100%',
+        maxWidth: '350px',
         marginLeft: 'auto',
         marginRight: 'auto'
       },
     },
 }));
 
-export default function FormLogin(props) {
+export default function FormLogin({parentCallback}) {
     const classes = useStyles();
-
+    const [alert, setAlert] = useState("");
+    
     const {
         register, 
         handleSubmit, 
@@ -43,20 +44,29 @@ export default function FormLogin(props) {
         })
         .then(response => { 
             if (response.data.result.token) {
-              localStorage.setItem("token", JSON.stringify(response.data.result.token));
+                localStorage.setItem("token", JSON.stringify(response.data.result.token));
+                setAlertTo("success");
+                // setTimeout(() => {
+                //     window.location.href = "/";
+                // }, 1000);
             }
-            // console.log(response)
-            // console.log(AuthService.getToken())
+            console.log(response)
+            console.log(AuthService.getToken())
         })
         .catch(error => {
             console.log(error.response)
         });   
     }
 
+    const setAlertTo = (alert) => {
+        setAlert(alert);
+        parentCallback(alert)
+    }
+
     return (
         <Fragment>
             <form onSubmit={handleSubmit(onSubmit)}  className={classes.root}>
-                <div>
+                <div className="mt-5">
                     <TextField variant="outlined"
                         name="email"
                         label="Email"
@@ -84,12 +94,7 @@ export default function FormLogin(props) {
 
 
                 <SubmitBtn value="Masuk" />
-            </form>
-
-            <div className="text--center mt-20">
-                <p className="mb-10">Belum punya akun?</p>
-                <a className="link mt-10" href="/daftar">Daftar</a>
-            </div>               
+            </form>              
         </Fragment>
     );
 }

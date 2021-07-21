@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import './assets/main.style.css'
 
-axios.defaults.baseURL = 'https://api.tentiraorta.com/';
+axios.defaults.baseURL = 'https://api.tentiraorta.com';
 
 ReactDOM.render(<Router />, document.getElementById('root'));
 serviceWorker.unregister();

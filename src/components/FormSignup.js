@@ -6,7 +6,6 @@ import axios from "axios";
 import AuthService from '../services/auth.service';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Alert from '@material-ui/lab/Alert';
 import TextField from '@material-ui/core/TextField';
 
 import SubmitBtn from './SubmitBtn';
@@ -15,14 +14,18 @@ const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
         margin: theme.spacing(2),
-        width: '200px',
+        width: '100%',
+        maxWidth: '350px',
+        marginLeft: 'auto',
+        marginRight: 'auto'
       },
     },
 }));
 
-export default function FormLogin(props) {
+export default function FormLogin({parentCallback}) {
     const classes = useStyles();
-
+    const [alert, setAlert] = useState("");
+    
     const {
         register, 
         handleSubmit, 
@@ -30,7 +33,7 @@ export default function FormLogin(props) {
     } = useForm();
 
     const onSubmit = (data) => {
-        handleLogin(
+        handleSignup(
             data.nama, 
             data.email, 
             data.password,
@@ -38,10 +41,10 @@ export default function FormLogin(props) {
             data.pekerjaan)
     };
 
-    function handleLogin (nama, email, password, asal_universitas, pekerjaan) {
-        console.log(email, password)
+    function handleSignup (nama, email, password, asal_universitas, pekerjaan) {
+        console.log(nama, email, password, asal_universitas, pekerjaan)
 
-        axios.post('register', {
+        axios.post('/register', {
             email: email,
             password: password,
             nama: nama,
@@ -49,22 +52,33 @@ export default function FormLogin(props) {
             pekerjaan: pekerjaan
         })
         .then(response => { 
-            if (response.data.code == 201) {
-                
-            }
             console.log(response)
-            // console.log(AuthService.getToken())
+            console.log(alert)
+            if (response.status === 201) {
+                setAlertTo("success");
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 2000);
+            }
+            else {
+                setAlertTo("error");
+            }
         })
         .catch(error => {
             console.log(error.response)
-        });   
+            console.log(alert)
+            setAlertTo("error")
+        });     
+    }
+
+    const setAlertTo = (alert) => {
+        setAlert(alert);
+        parentCallback(alert)
+        console.log(alert)
     }
 
     return (
         <Fragment>
-            <Alert variant="filled" severity="success">Akun Berhasil terdaftar. Silakan login!</Alert>
-            <Alert variant="filled" severity="error">Akun sudah terdaftar. Gunakan email yang lain.</Alert>
-
             <form onSubmit={handleSubmit(onSubmit)}  className={classes.root}>
                 <div>
                     <TextField variant="outlined"
@@ -128,11 +142,6 @@ export default function FormLogin(props) {
 
                 <SubmitBtn value="Daftar" />
             </form>
-
-            <div className="text--center mt-20">
-                <p className="mb-10">Belum punya akun?</p>
-                <a className="link mt-10" href="/daftar">Daftar</a>
-            </div>               
         </Fragment>
     );
 }
