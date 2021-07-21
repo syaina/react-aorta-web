@@ -532,6 +532,10 @@ h6 {
   background: #ffca39;
 }
 
+.bg-butterscotch {
+  background: #ffca39;
+}
+
 .font-white {
   color: #ffffff;
 }
@@ -648,6 +652,12 @@ h6 {
 
 .font-weight-normal {
   font-weight: normal;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
 .btn {

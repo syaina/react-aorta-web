@@ -20,7 +20,9 @@ class AuthService {
     }
 
     logout() {
-        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("nama");
+        localStorage.removeItem("email");
     }
 
     register(email, password, nama, asal_universitas, pekerjaan) {
@@ -34,7 +36,15 @@ class AuthService {
     }
 
     getToken() {
-        return JSON.parse(localStorage.getItem('token'));;
+        return JSON.parse(localStorage.getItem('token'));
+    }
+
+    getUser() {
+        return JSON.parse(localStorage.getItem('nama'));
+    }
+
+    getEmail() {
+        return JSON.parse(localStorage.getItem('email'));
     }
 }
 

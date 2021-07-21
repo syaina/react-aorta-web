@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import authService from '../services/auth.service';
 
 import AuthService from '../services/auth.service';
 
 function Header (props) {
     const [isLogin, setIsLogin] = useState(false);
+    const [name, setName] = useState();
 
     useEffect(() => {
         if (AuthService.getToken()) {
             setIsLogin(true);
+            setName(AuthService.getUser());
         }
     }, [])
     // const [isHamburger, setHamburger] = useState(false);
@@ -16,6 +19,12 @@ function Header (props) {
     // function openHamburger () {
     //     isHamburger ? setHamburger(false) : setHamburger(true)
     // }
+    const logout = () => {
+        AuthService.logout()
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 1000);
+    }
 
     return (
         <header>
@@ -27,7 +36,7 @@ function Header (props) {
                 <li><Link to="/latihan-soal">Latihan Soal</Link></li>
             </ul>
             {
-                isLogin ? AuthService.getToken() : <Link className="link-btn" to="/login">Login/Buat Akun</Link>
+                isLogin ? <button className="link-btn" onClick={() => logout()}>Hai, {name}</button> : <Link className="link-btn" to="/login">Login/Buat Akun</Link>
 
             }
             

@@ -45,10 +45,12 @@ export default function FormLogin({parentCallback}) {
         .then(response => { 
             if (response.data.result.token) {
                 localStorage.setItem("token", JSON.stringify(response.data.result.token));
+                localStorage.setItem("nama", JSON.stringify(response.data.result.nama));
+                localStorage.setItem("email", JSON.stringify(response.data.result.email));
                 setAlertTo("success");
-                // setTimeout(() => {
-                //     window.location.href = "/";
-                // }, 1000);
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 1000);
             }
             console.log(response)
             console.log(AuthService.getToken())
