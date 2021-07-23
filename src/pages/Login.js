@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
-import FormLogin from '../components/FormLogin';
 
-import Alert from '@material-ui/lab/Alert';
+import FormLogin from '../components/FormLogin';
+import AlertMessage from '../components/AlertMessage';
 
 export default function Login() {
-    const [alertSuccess, setAlertSuccess] = useState(false);
-    const [alertError, setAlertError] = useState(false);
+    const [severity, setSeverity] = useState();
+    const [message, setMessage] = useState();
+    const [isAlert, setAlert] = useState(false);
 
     const callback = (alert) => {
         if (alert === 'success') {
-            setAlertSuccess(true);
-            setAlertError(false);
+            setSeverity("success");
+            setMessage("Login berhasil!");
+            setAlert(true)
         }
         else if (alert === 'error') {
-            setAlertError(true);
-            setAlertSuccess(false);
+            setSeverity("error");
+            setMessage("Email atau password salah");
+            setAlert(true)
         }
+
     }
 
     return (
         <div>
-            {
-                alertSuccess ?  <Alert variant="filled" severity="success">Login berhasil!</Alert> : ""
-            }
-            {
-                alertError ? <Alert variant="filled" severity="error">Email atau password salah</Alert> : ""
-            }
+            { isAlert ? <AlertMessage severity={severity} message={message}/> : null }
 
             <div className="center mt-5">
                 <div className="bg-white border-primary py-5 width-auto">

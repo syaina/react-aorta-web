@@ -80,11 +80,11 @@ export default function Home () {
                 </div>
             </div>
             <div className="container my-5">
-                <h3 className="center font-secondary py-4">Apa kata mereka?</h3>
+                <h3 className="center font-primary pt-4 pb-5">Apa kata mereka?</h3>
                 <TestimoniSlider />
             </div>
             <div className="container my-5">
-                <h3 className="center font-secondary py-4">Pesan program kami sekarang</h3>
+                <h3 className="center font-secondary pt-4 pb-5">Pesan program kami sekarang</h3>
                 <Grid container spacing={2}>
                     <Grid item sm={6} md={4} lg={4}>
                         <div class="card bg-dark-blue">

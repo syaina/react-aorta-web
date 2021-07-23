@@ -45,7 +45,8 @@ export default function FormLogin({parentCallback}) {
         .then(response => { 
             if (response.data.result.token) {
                 localStorage.setItem("token", JSON.stringify(response.data.result.token));
-                localStorage.setItem("nama", JSON.stringify(response.data.result.nama));
+                localStorage.setItem("id_user", JSON.stringify(response.data.result.id_user));
+                localStorage.setItem("name", JSON.stringify(response.data.result.nama));
                 localStorage.setItem("email", JSON.stringify(response.data.result.email));
                 setAlertTo("success");
                 setTimeout(() => {
@@ -57,6 +58,7 @@ export default function FormLogin({parentCallback}) {
         })
         .catch(error => {
             console.log(error.response)
+            setAlertTo("error")
         });   
     }
 
