@@ -32,7 +32,7 @@ function Header (props) {
 
     return (
         <header>
-            <Link to="/"><img src="../logo.png" alt="AORTA" /></Link>
+            <Link to="/"><img src="/../logo.png" alt="AORTA" /></Link>
             <ul>
                 <li><Link to="/profil-aorta">Profil Aorta</Link></li>
                 <li><Link to="/profil-pengajar">Profil Pengajar</Link></li>

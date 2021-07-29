@@ -540,6 +540,10 @@ h6 {
   color: #ffffff;
 }
 
+.font-underline {
+  text-decoration: underline;
+}
+
 .d-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -742,6 +746,19 @@ button {
 .MuiButton-root.Mui-disabled {
   background-color: white !important;
   color: rgba(0, 0, 0, 0.26) !important;
+}
+
+.MuiCircularProgress-colorPrimary {
+  color: #ffca39 !important;
+}
+
+.PrivateTabIndicator-colorSecondary-5 {
+  background-color: #0b1d2a !important;
+}
+
+.tabpanel {
+  width: 100% !important;
+  background: #ffca39 !important;
 }
 
 .img-preview-container {

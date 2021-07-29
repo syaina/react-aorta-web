@@ -12,17 +12,19 @@ export default function UploadFiles({parentCallback}) {
         reader.onload = () => {
             if(reader.readyState === 2) {
                 setPreviewFile(reader.result)
+                setFile(selectedFile)
             }
         }
         reader.readAsDataURL(e.target.files[0])
-        fileHandler(selectedFile)
+        // fileHandler(selectedFile)
     }
 
     const fileHandler = (selectedFile) => {
         const formData = new FormData()
         // formData.append("name", selectedFile.name);
-        formData.append("file", selectedFile);
+        formData.append('image', selectedFile, selectedFile.name);
         console.log(selectedFile)
+        console.log('formdata' + formData)
         setFile(selectedFile)
     }
 
