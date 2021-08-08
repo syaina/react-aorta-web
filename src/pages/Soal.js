@@ -62,13 +62,23 @@ export default function Soal () {
     const {materi, bab} = useParams()
     const [soal, setSoal] = useState([])
     const [judulBab, setJudulBab] = useState()
+    const [answer, setAnswer] = useState([])
+    const [correct, setCorrect] = useState()
 
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const handlePrev = () => {
+        setValue(value-1)
+    }
+
+    const handleNext = () => {
+        setValue(value+1)
+    }
 
     useEffect(() => {
         axios.get("/bab/slug/" + bab)
@@ -82,8 +92,9 @@ export default function Soal () {
                 .then((response) => {
                     if(response.status == 200) {
                         let resp = [];
-                        console.log(response.data.results)
-        
+                        let resp2 = []
+                        let j = 1;
+                        
                         response.data.results.map((result) => {
                             resp.push({
                                 id: result.id,
@@ -100,7 +111,20 @@ export default function Soal () {
                                 url_gambar: result.url_gambar
                             });
                         });
+
+                        let i = 1;
+
+                        response.data.results.map((result) => {
+                          resp2.push({
+                              id: i,
+                              id_soal: result.id_soal,
+                              answer: "",
+                              answerKey: result.jawaban
+                            });
+                            i += 1
+                        });
                         setSoal(resp);
+                        setAnswer(resp2);
                     }
                     
                 })
@@ -114,10 +138,40 @@ export default function Soal () {
         })
     }, [])
 
+    const selectOption = (selectedId, optionValue) => {
+      setAnswer(
+        answer.map((item) =>
+          item.id_soal === selectedId ? {...item, answer: optionValue} : item
+        )
+      )
+    }
+    
+    useEffect(() => {
+      countScore()
+    }, [answer])
+
+    const countScore = () => {
+      let correct = 0
+      answer.map((item) =>
+        item.answer === item.answerKey ? correct += 1 : null 
+      )
+      setCorrect(correct)
+    }
+
+
     return (
         <div className="container mt-5">
+            {
+                answer.map((item) =>
+                  <p>{item.id_soal}, {item.answer}, {item.answerKey}</p>
+                  
+                )
+            }
+            <p>Correct: {correct}</p>
+           
             <h3 className="pb-5 center">{judulBab}</h3>
-            <div className={classes.root}>
+            <form action="">
+              <div className={classes.root}>
                 <Tabs
                     orientation="vertical"
                     value={value}
@@ -131,22 +185,39 @@ export default function Soal () {
                         ))
                     }
                 </Tabs>
+              
                 {
-                    soal.map((data, index) => (
+                    soal.map((data, index) => ( 
                         <TabPanel value={value} index={index} class={classes.tabPanel}>
                             <p>{data.soal}</p>
-                            <p>{data.pil1}</p>
-                            <p>{data.pil2}</p>
-                            <p>{data.pil3}</p>
-                            <p>{data.pil4}</p>
-                            <p>{data.pil5}</p>
+                            <input type="radio" name={data.id_soal} id="pil1" value="a" onClick={() => selectOption(data.id_soal, "a")} />
+                            <label for="pil1">{data.pil1}</label>
+
+                            <input type="radio" name={data.id_soal} id="pil2" value="b" onClick={() => selectOption(data.id_soal, "b")} />
+                            <label for="pil2">{data.pil2}</label>
+
+                            <input type="radio" name={data.id_soal} id="pil3" value="c" onClick={() => selectOption(data.id_soal, "c")} />
+                            <label for="pil3">{data.pil3}</label>
+
+                            <input type="radio" name={data.id_soal} id="pil4" value="d" onClick={() => selectOption(data.id_soal, "d")} />
+                            <label for="pil4">{data.pil4}</label>
+
+                            <input type="radio" name={data.id_soal} id="pil5" value="e" onClick={() => selectOption(data.id_soal, "e")} />
+                            <label for="pil5">{data.pil5}</label>
                             <p>Jawaban: {data.jawaban}</p>
+
+                            {
+                              value > 0 ? <button onClick={() => handlePrev()}>Prev</button> : null
+                            }
+                            {
+                              value < soal.length-1 ? <button onClick={() => handleNext()}>Next</button> : null
+                            }
+                            
                         </TabPanel>
                     ))
                 }
-                
-               
             </div>
+          </form>
         </div>
     )
 }
