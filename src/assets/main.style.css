@@ -678,7 +678,6 @@ button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 12px;
   font-size: 1rem;
   border-radius: 20px;
   font-weight: bold;
@@ -688,6 +687,8 @@ button {
 .btn-primary {
   background: #ffca39;
   color: #292929;
+  font-size: 0.875rem;
+  padding: .5rem 1rem;
 }
 
 .btn-primary:hover {
@@ -798,5 +799,25 @@ input#input-files {
 
 .label-input-files label {
   cursor: pointer;
+}
+
+.option-group input[type="radio"] {
+  display: none;
+}
+
+.option-group input[type="radio"]:checked + label {
+  background: #ffca39;
+}
+
+.option-group label {
+  background: rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+  padding: 12px;
+  padding-left: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=main.style.css.map */

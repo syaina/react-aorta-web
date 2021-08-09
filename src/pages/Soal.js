@@ -103,11 +103,28 @@ export default function Soal () {
                                 id_soal: result.id_soal,
                                 soal: result.soal,
                                 jawaban: result.jawaban,
-                                pil1: result.pil1,
-                                pil2: result.pil2,
-                                pil3: result.pil3,
-                                pil4: result.pil4,
-                                pil5: result.pil5,
+                                option: [
+                                  { 
+                                    opt: result.pil1,
+                                    selected: false
+                                  },
+                                  {
+                                    opt: result.pil2,
+                                    selected: false
+                                  },
+                                  {
+                                    opt: result.pil3,
+                                    selected:false
+                                  },
+                                  {
+                                    opt: result.pil4,
+                                    selected:false
+                                  },
+                                  {
+                                    opt: result.pil5,
+                                    selected:false
+                                  }
+                                ],
                                 url_gambar: result.url_gambar
                             });
                         });
@@ -138,7 +155,32 @@ export default function Soal () {
         })
     }, [])
 
-    const selectOption = (selectedId, optionValue) => {
+    const selectOption = (optionId, selectedId, optionValue) => {
+      // setSoal(
+      //   soal.map((data) => {
+      //     data.id_soal === selectedId ? {...data, option:
+      //       option.map((index, item) => {
+      //         index === optionId ? {...item, selected: true} : {...item, selected: false}
+      //       })
+      //     } : data
+      //   })
+      // )
+      setSoal(
+        soal.map((item, index) =>
+          item.id_soal === selectedId 
+            ? {
+                ...item,
+                option: item.option.map((item, index) =>
+                  index === optionId
+                    ? { ...item, selected: true }
+                    : { ...item, selected: false }
+                ),
+              }
+            : item
+        )
+      )
+      
+      console.log(soal[0].option[0].selected)
       setAnswer(
         answer.map((item) =>
           item.id_soal === selectedId ? {...item, answer: optionValue} : item
@@ -161,13 +203,13 @@ export default function Soal () {
 
     return (
         <div className="container mt-5">
-            {
+            {/* {
                 answer.map((item) =>
                   <p>{item.id_soal}, {item.answer}, {item.answerKey}</p>
                   
                 )
             }
-            <p>Correct: {correct}</p>
+            <p>Correct: {correct}</p> */}
            
             <h3 className="pb-5 center">{judulBab}</h3>
             <form action="">
@@ -185,32 +227,34 @@ export default function Soal () {
                         ))
                     }
                 </Tabs>
-              
+                
                 {
                     soal.map((data, index) => ( 
                         <TabPanel value={value} index={index} class={classes.tabPanel}>
+                          
                             <p>{data.soal}</p>
-                            <input type="radio" name={data.id_soal} id="pil1" value="a" onClick={() => selectOption(data.id_soal, "a")} />
-                            <label for="pil1">{data.pil1}</label>
+                            <div className="option-group mt-2">
+                              <input type="radio" name={data.id_soal} id="pil1" value="a" checked={data.option[0].selected} onClick={() => selectOption(0, data.id_soal, "a")} />
+                              <label for="pil1">{data.option[0].opt}</label>
 
-                            <input type="radio" name={data.id_soal} id="pil2" value="b" onClick={() => selectOption(data.id_soal, "b")} />
-                            <label for="pil2">{data.pil2}</label>
+                              <input type="radio" name={data.id_soal} id="pil2" value="b" checked={data.option[1].selected} onClick={() => selectOption(1, data.id_soal, "b")} />
+                              <label for="pil2">{data.option[1].opt}</label>
 
-                            <input type="radio" name={data.id_soal} id="pil3" value="c" onClick={() => selectOption(data.id_soal, "c")} />
-                            <label for="pil3">{data.pil3}</label>
+                              <input type="radio" name={data.id_soal} id="pil3" value="c" checked={data.option[2].selected} onClick={() => selectOption(2, data.id_soal, "c")} />
+                              <label for="pil3">{data.option[2].opt}</label>
 
-                            <input type="radio" name={data.id_soal} id="pil4" value="d" onClick={() => selectOption(data.id_soal, "d")} />
-                            <label for="pil4">{data.pil4}</label>
+                              <input type="radio" name={data.id_soal} id="pil4" value="d" checked={data.option[3].selected} onClick={() => selectOption(3, data.id_soal, "d")} />
+                              <label for="pil4">{data.option[3].opt}</label>
 
-                            <input type="radio" name={data.id_soal} id="pil5" value="e" onClick={() => selectOption(data.id_soal, "e")} />
-                            <label for="pil5">{data.pil5}</label>
-                            <p>Jawaban: {data.jawaban}</p>
+                              <input type="radio" name={data.id_soal} id="pil5" value="e" checked={data.option[4].selected} onClick={() => selectOption(4, data.id_soal, "e")} />
+                              <label for="pil5">{data.option[4].opt}</label>
+                            </div>
 
                             {
-                              value > 0 ? <button onClick={() => handlePrev()}>Prev</button> : null
+                              value > 0 ? <button className="btn btn-primary btn-small mr-2 my-4" onClick={() => handlePrev()}>Prev</button> : null
                             }
                             {
-                              value < soal.length-1 ? <button onClick={() => handleNext()}>Next</button> : null
+                              value < soal.length-1 ? <button  className="btn btn-primary btn-small my-4" onClick={() => handleNext()}>Next</button> : null
                             }
                             
                         </TabPanel>
