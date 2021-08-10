@@ -11,6 +11,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+import ConfirmDialog, { confirmDialog } from '../components/ConfirmDialog';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -67,6 +69,8 @@ export default function Soal () {
 
     const classes = useStyles();
     const [value, setValue] = useState(0);
+
+    const [openDialog, setOpenDialog] = useState(false);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -180,7 +184,7 @@ export default function Soal () {
         )
       )
       
-      console.log(soal[0].option[0].selected)
+      console.log(answer)
       setAnswer(
         answer.map((item) =>
           item.id_soal === selectedId ? {...item, answer: optionValue} : item
@@ -200,19 +204,15 @@ export default function Soal () {
       setCorrect(correct)
     }
 
+    const handleConfirm = () => {
+      console.log(answer)
+    }
 
     return (
         <div className="container mt-5">
-            {/* {
-                answer.map((item) =>
-                  <p>{item.id_soal}, {item.answer}, {item.answerKey}</p>
-                  
-                )
-            }
-            <p>Correct: {correct}</p> */}
-           
+            <ConfirmDialog /> 
             <h3 className="pb-5 center">{judulBab}</h3>
-            <form action="">
+            <form action="" onSubmit={e => { e.preventDefault() }}  >
               <div className={classes.root}>
                 <Tabs
                     orientation="vertical"
@@ -251,17 +251,26 @@ export default function Soal () {
                             </div>
 
                             {
-                              value > 0 ? <button className="btn btn-primary btn-small mr-2 my-4" onClick={() => handlePrev()}>Prev</button> : null
+                              value > 0 ? <button className="btn btn-primary btn-small mr-2 mt-4" onClick={() => handlePrev()}>Sebelumnya</button> : null
                             }
                             {
-                              value < soal.length-1 ? <button  className="btn btn-primary btn-small my-4" onClick={() => handleNext()}>Next</button> : null
+                              value < soal.length-1 ? <button  className="btn btn-primary btn-small mt-4" onClick={() => handleNext()}>Selanjutnya</button> : null
                             }
-                            
+                            {
+                              value == soal.length-1 ? <button className="btn btn-secondary btn-small mt-4" onClick={() => {confirmDialog("Apa kamu yakin untuk submit jawabanmu?", () => handleConfirm());}}>Submit</button> : null
+                            }
                         </TabPanel>
                     ))
                 }
             </div>
           </form>
+           {
+                answer.map((item) =>
+                  <p>{item.id_soal}, {item.answer}, {item.answerKey}</p>
+                  
+                )
+            }
+            <p>Correct: {correct}</p>
         </div>
     )
 }

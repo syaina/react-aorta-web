@@ -688,11 +688,22 @@ button {
   background: #ffca39;
   color: #292929;
   font-size: 0.875rem;
-  padding: .5rem 1rem;
+  padding: 12px 20px;
 }
 
 .btn-primary:hover {
   background: #ffbc06;
+}
+
+.btn-secondary {
+  background: #0b1d2a;
+  color: #ffffff;
+  font-size: 0.875rem;
+  padding: 12px 20px;
+}
+
+.btn-secondary:hover {
+  background: #163952;
 }
 
 .border-primary {
