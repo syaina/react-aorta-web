@@ -18,7 +18,7 @@ const useConfirmDialogStore = create((set) => ({
   close: () => set({ onSubmit: undefined }),
 }));
 
-const ConfirmDialog = () => {
+const ConfirmDialog = (props) => {
   // destructure the store data and functions
  const { message, onSubmit, close } = useConfirmDialogStore();
  return (
@@ -37,7 +37,7 @@ const ConfirmDialog = () => {
      </DialogContent>
      <DialogActions>
        <Button color="grey" variant="" onClick={close}>
-         Kembali
+         {props.backButton}
        </Button>
        <Button
          color="primary"
@@ -49,7 +49,7 @@ const ConfirmDialog = () => {
            close();
          }}
        >
-         Lanjutkan
+         {props.confirmButton}
        </Button>
      </DialogActions>
    </Dialog>
