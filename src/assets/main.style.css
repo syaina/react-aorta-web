@@ -490,6 +490,32 @@ h6 {
   font-weight: 900;
 }
 
+footer {
+  width: 100%;
+  color: white;
+}
+
+.footer-contact-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.footer-contact-container > div {
+  margin: 10px 0;
+}
+
+.footer-contact-container .contact-icon img {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .font-grey {
   color: #0b1d2a;
 }
@@ -575,7 +601,7 @@ h6 {
 }
 
 .container-question-box {
-  padding-bottom: 30px;
+  padding-bottom: 50px;
   border-radius: 20px;
 }
 
