@@ -49,6 +49,7 @@ export default function HorizontalLabelPositionBelowStepper(props) {
   const id_user = AuthService.getUser();
   const [produk, setProduk] = useState();
   const [noHandphone, setNoHandphone] = useState();
+  const [produkLainnya, setProdukLainnya] = useState();
   const [buktiTransfer, setBuktiTransfer] = useState();
 
   const steps = getSteps();
@@ -73,9 +74,10 @@ export default function HorizontalLabelPositionBelowStepper(props) {
     return ['Pilih Kelas', 'Bukti Transfer'];
   }
 
-  const callback = (produk, noHandphone) => {
+  const callback = (produk, noHandphone, produkLainnya) => {
     setProduk(produk);
-    setNoHandphone(noHandphone)
+    setProdukLainnya(produkLainnya);
+    setNoHandphone(noHandphone);
   }
 
   const getFiles = (files) => {
@@ -98,6 +100,7 @@ export default function HorizontalLabelPositionBelowStepper(props) {
     const formData = new FormData()
     formData.append('id_user', id_user);
     formData.append('id_produk', produk);
+    formData.append('other_produk', produkLainnya);
     formData.append('no_handphone', noHandphone);
     formData.append('bukti_transfer', buktiTransfer);
 
