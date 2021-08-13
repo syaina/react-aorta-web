@@ -11,6 +11,7 @@ import ProfilPengajar from '../pages/ProfilPengajar';
 import Materi from '../pages/Materi';
 import Bab from '../pages/Bab';
 import Soal from '../pages/Soal';
+import SoalResult from '../pages/SoalResult';
 
 
 function routes() {
@@ -26,8 +27,8 @@ function routes() {
                 <Route exact path="/latihan-soal" component={Materi} />
                 <Route exact path="/latihan-soal/:materi" component={Bab} />
                 <Route exact path="/latihan-soal/:materi/:bab" component={Soal} />
+                <Route exact path="/latihan-soal-dan-pembahasan" component={SoalResult} />
                 {/* <Route exact path="/articles" component={Articles} />
-                <Route path="/faq" component={Faq} />
                 <Route path="/about" component={About} />
                 <Route path="/contact" component={Contact} />
                 <Route exact path="/products" component={Products} />

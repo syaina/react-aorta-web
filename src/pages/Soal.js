@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import { Link, useParams } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-
+import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -67,10 +65,10 @@ export default function Soal () {
     const [answer, setAnswer] = useState([])
     const [correct, setCorrect] = useState()
 
+    let history = useHistory();
+
     const classes = useStyles();
     const [value, setValue] = useState(0);
-
-    const [openDialog, setOpenDialog] = useState(false);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -106,27 +104,34 @@ export default function Soal () {
                                 id_bab: result.id_bab,
                                 id_soal: result.id_soal,
                                 soal: result.soal,
+                                url_gambar: result.url_gambar,
                                 jawaban: result.jawaban,
+                                pembahasan: result.pembahasan,
                                 option: [
                                   { 
                                     opt: result.pil1,
-                                    selected: false
+                                    selected: false,
+                                    correctAnswer: result.jawaban === "a" ? true : false
                                   },
                                   {
                                     opt: result.pil2,
-                                    selected: false
+                                    selected: false,
+                                    correctAnswer: result.jawaban === "b" ? true : false
                                   },
                                   {
                                     opt: result.pil3,
-                                    selected:false
+                                    selected:false,
+                                    correctAnswer: result.jawaban === "c" ? true : false
                                   },
                                   {
                                     opt: result.pil4,
-                                    selected:false
+                                    selected:false,
+                                    correctAnswer: result.jawaban === "d" ? true : false
                                   },
                                   {
                                     opt: result.pil5,
-                                    selected:false
+                                    selected:false,
+                                    correctAnswer: result.jawaban === "e" ? true : false
                                   }
                                 ],
                                 url_gambar: result.url_gambar
@@ -160,15 +165,6 @@ export default function Soal () {
     }, [])
 
     const selectOption = (optionId, selectedId, optionValue) => {
-      // setSoal(
-      //   soal.map((data) => {
-      //     data.id_soal === selectedId ? {...data, option:
-      //       option.map((index, item) => {
-      //         index === optionId ? {...item, selected: true} : {...item, selected: false}
-      //       })
-      //     } : data
-      //   })
-      // )
       setSoal(
         soal.map((item, index) =>
           item.id_soal === selectedId 
@@ -206,11 +202,15 @@ export default function Soal () {
 
     const handleConfirm = () => {
       console.log(answer)
+      history.push({
+        pathname: '/latihan-soal-dan-pembahasan',
+        state: { answer, soal, correct, judulBab }
+      });
     }
 
     return (
         <div className="container mt-5">
-            <ConfirmDialog /> 
+            <ConfirmDialog backButton="Kembali" confirmButton="Submit" /> 
             <h3 className="pb-5 center">{judulBab}</h3>
             <form action="" onSubmit={e => { e.preventDefault() }}  >
               <div className={classes.root}>
@@ -231,8 +231,10 @@ export default function Soal () {
                 {
                     soal.map((data, index) => ( 
                         <TabPanel value={value} index={index} class={classes.tabPanel}>
-                          
                             <p>{data.soal}</p>
+                            <div className="soal-img-container my-3">
+                              <img src={data.url_gambar} alt="" />
+                            </div>
                             <div className="option-group mt-2">
                               <input type="radio" name={data.id_soal} id="pil1" value="a" checked={data.option[0].selected} onClick={() => selectOption(0, data.id_soal, "a")} />
                               <label for="pil1">{data.option[0].opt}</label>
@@ -257,7 +259,7 @@ export default function Soal () {
                               value < soal.length-1 ? <button  className="btn btn-primary btn-small mt-4" onClick={() => handleNext()}>Selanjutnya</button> : null
                             }
                             {
-                              value == soal.length-1 ? <button className="btn btn-secondary btn-small mt-4" onClick={() => {confirmDialog("Apa kamu yakin untuk submit jawabanmu?", () => handleConfirm());}}>Submit</button> : null
+                              value == soal.length-1 ? <button className="btn btn-secondary btn-small mt-4" onClick={() => {confirmDialog("Yakin submit jawabanmu sekarang? Periksa kembali jawabanmu.", () => handleConfirm());}}>Selesai</button> : null
                             }
                         </TabPanel>
                     ))

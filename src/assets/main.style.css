@@ -721,6 +721,14 @@ button {
   text-decoration: underline;
 }
 
+.loading-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
 .MuiAlert-root {
   position: absolute;
   margin: auto;
@@ -830,5 +838,30 @@ input#input-files {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.option-group label.answer-true {
+  background: #0db898;
+  color: #ffffff;
+}
+
+.option-group label.answer-false {
+  background: #F22F57;
+  color: #ffffff;
+}
+
+.soal-img-container {
+  max-width: 200px;
+  margin: auto;
+}
+
+.soal-img-container img {
+  height: 100%;
+  width: 100%;
+}
+
+.max-width--sm {
+  max-width: 960px;
+  margin: auto;
 }
 /*# sourceMappingURL=main.style.css.map */
