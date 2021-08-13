@@ -38,9 +38,13 @@ const useStyles = makeStyles((theme) => ({
 export default function FormBooking({parentCallback}) {
     const classes = useStyles();
     const [alert, setAlert] = useState("");
-    const [produk, setProduk] = useState();
-    const [noHandphone, setNoHandphone] = useState()
     const [products, setProducts] = useState([]);
+
+    const [produk, setProduk] = useState();
+    const [produkLainnya, setProdukLainnya] = useState("");
+    const [noHandphone, setNoHandphone] = useState()
+
+    const [anotherOption, setAnotherOption] = useState(false);
     
     const {
         handleSubmit, 
@@ -58,7 +62,7 @@ export default function FormBooking({parentCallback}) {
                 response.data.results.map((resp) => {
                     respProduct.push({
                         id_produk: resp.id_produk,
-                        produk: resp.produk
+                        produk: resp.produk,
                     });
                  });
 
@@ -71,84 +75,64 @@ export default function FormBooking({parentCallback}) {
         });
     }, [products])
 
-    const onSubmit = (data) => {
-        console.log(produk)
-        console.log(noHandphone)
-    };
+    useEffect(() => {  
+        produk === "other" ? setAnotherOption(true) : setAnotherOption(false)
+        parentCallback(produk, noHandphone, produkLainnya)
+    }, [produk, noHandphone, produkLainnya]);
 
-    function handleBooking (email, password) {
-        console.log(email, password)
-
-        axios.post('login', {
-            email: email,
-            password: password
-        })
-        .then(response => { 
-            if (response.data.result.token) {
-                localStorage.setItem("token", JSON.stringify(response.data.result.token));
-                localStorage.setItem("nama", JSON.stringify(response.data.result.nama));
-                localStorage.setItem("email", JSON.stringify(response.data.result.email));
-                setAlertTo("success");
-                setTimeout(() => {
-                    window.location.href = "/";
-                }, 1000);
-            }
-            console.log(response)
-            console.log(AuthService.getToken())
-        })
-        .catch(error => {
-            console.log(error.response)
-        });   
+    const showAnotherOption = () => {
+        setAnotherOption(true)
     }
-
-    const setAlertTo = (alert) => {
-        setAlert(alert);
-        parentCallback(alert)
-    }
-
-    useEffect(() => {   
-        parentCallback(produk, noHandphone)
-    }, [produk, noHandphone]);
 
     return (
         <Fragment>
-            <form onSubmit={handleSubmit(onSubmit)}  className={classes.root}>
+            <form className={classes.root}>
                 <div className="">
-                <FormControl variant="outlined" className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-outlined-label">Produk</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={produk}
-                        onChange={(event) => setProduk(event.target.value)}
-                        label="Produk"
-                        >
-                            {
-                                products.map((product) => (
-                                    <MenuItem value={product.id_produk}>{product.produk}</MenuItem>
-                                
-                                ))
-                            }
-                    </Select>
-                </FormControl>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-outlined-label">Produk</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            value={produk}
+                            onChange={(event) => setProduk(event.target.value)}
+                            label="Produk"
+                            >
+                                {
+                                    products.map((product) => (
+                                        <MenuItem value={product.id_produk}>{product.produk}</MenuItem>
+                                    
+                                    ))
+                                }
+                                <MenuItem value="other" onSelected={() => showAnotherOption()}>Lainnya</MenuItem>
+                        </Select>
+                        
+                        {
+                            anotherOption ?  
+                                <div className="mt-2"> 
+                                    <TextField variant="standard" 
+                                        name="other"
+                                        label="Produk Lain"
+                                        placeholder="Isi Produk Lainnya"
+                                        type="text"
+                                        onChange={(event) => setProdukLainnya(event.target.value)}
+                                        fullWidth
+                                    />
+                                </div>
+                            : null
+                        }
+                       
+                    </FormControl>
                 </div>
 
                 <div className="mb-5">
                     <TextField variant="outlined"
                         name="no_handphone"
                         label="No. Handphone/WA"
-                        type="text"
+                        type="tel"
                         onChange={(event) => {setNoHandphone(event.target.value)}}
                         fullWidth
                     />
                 </div>
-
-
-
-                {errors.password && <p>Your password is less than 8 characters</p>}
-
-
-                {/* <SubmitBtn value="Masuk" /> */}
             </form>              
         </Fragment>
     );
