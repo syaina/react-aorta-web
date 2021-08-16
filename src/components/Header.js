@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import AuthService from '../services/auth.service';
 
+import DropdownMenu from './DropdownMenu';
+
 function Header (props) {
     const [isLogin, setIsLogin] = useState(false);
     const [name, setName] = useState();
@@ -18,12 +20,6 @@ function Header (props) {
     // function openHamburger () {
     //     isHamburger ? setHamburger(false) : setHamburger(true)
     // }
-    const logout = () => {
-        AuthService.logout()
-        setTimeout(() => {
-            window.location.href = "/";
-        }, 1000);
-    }
 
     const getFirstName = (name) => {
         const splitName = name.split(" ")
@@ -40,8 +36,9 @@ function Header (props) {
                 <li><Link to="/latihan-soal">Latihan Soal</Link></li>
                 <li><Link to="/latihan-soal">{AuthService.getUser()}</Link></li>
             </ul>
+            
             {
-                isLogin ? <button className="link-btn" onClick={() => logout()}>Hai, {name}</button> : <Link className="link-btn" to="/login">Login/Buat Akun</Link>
+                isLogin ? <DropdownMenu button={`Hai, ${name}`} /> : <Link className="link-btn" to="/login">Login/Buat Akun</Link>
 
             }
             

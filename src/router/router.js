@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Header from '../components/Header';
+import Tes from '../pages/Tes';
+// import Footer from '../components/Footer';
 
 import DaftarKelas from '../pages/DaftarKelas';
 import Home from '../pages/Home';
@@ -12,6 +14,7 @@ import Materi from '../pages/Materi';
 import Bab from '../pages/Bab';
 import Soal from '../pages/Soal';
 import SoalResult from '../pages/SoalResult';
+import Profile from '../pages/Profile';
 
 
 function routes() {
@@ -20,8 +23,10 @@ function routes() {
             <div>
                 <Header/>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/tes" component={Tes} />
                 <Route exact path="/daftar" component={Signup} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/profilku" component={Profile} />
                 <Route exact path="/profil-pengajar" component={ProfilPengajar} />
                 <Route exact path="/daftar-kelas" component={DaftarKelas} />
                 <Route exact path="/latihan-soal" component={Materi} />
@@ -36,6 +41,7 @@ function routes() {
 
                 {/* <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} /> */}
+                {/* <Footer/> */}
             </div>
         </Router>
     );
