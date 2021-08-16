@@ -3,9 +3,12 @@ import axios from 'axios';
 
 import { Link, useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import Spinner from '../components/Spinner';
 
 export default function Bab () {
     const { materi } = useParams();
+
+    const [loading, setLoading] = useState(true)
     const [bab, setBab] = useState([])
     const [judulMateri, setJudulMateri] = useState()
 
@@ -33,6 +36,7 @@ export default function Bab () {
                             });
                         });
                         setBab(resp);
+                        setLoading(false);
                     }
                     
                 })
@@ -45,6 +49,8 @@ export default function Bab () {
             console.log(error);
         })
     }, [])
+
+    if (loading) return <Spinner/>
 
     return (
         <div className="container mt-5">

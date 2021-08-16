@@ -27,8 +27,8 @@ export default function Signup () {
                 alertError ? <Alert variant="filled" severity="error">Akun sudah terdaftar. Gunakan email yang lain.</Alert> : ""
             }
 
-            <div className="center mt-3">
-                <div className="bg-white border-primary py-4 width-auto">
+            <div className="center mt-3 container">
+                <div className="bg-white border-primary py-4">
                     <h3 className="pt-1 pb-3 font-secondary font-color-black font-weight-normal">Buat Akun</h3>
                     <FormSignup parentCallback = {callback} />
                     

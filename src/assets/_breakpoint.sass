@@ -6,3 +6,67 @@
 .max-width--sm
     max-width: 960px
     margin: auto
+
+$media-desktop: "only screen and (max-width : 1024px)"
+$media-tablet: "only screen and (max-width : 768px)"
+$media-mobile: "only screen and (max-width : 600px)"
+$media-mobile-sm: "only screen and (max-width : 480px)"
+
+
+@media #{$media-desktop}
+    .container
+        // background: red
+        width: calc(100% - 5rem)
+        margin: auto
+    
+    .web-menu
+        font-size: $font-sm
+        margin: 24px
+
+    .title, .title-sub
+        text-align: center
+
+    footer
+        text-align: center
+
+
+
+@media #{$media-tablet} 
+    .container
+        background: violet
+
+    .web-menu
+        display: none !important
+
+
+@media #{$media-mobile} 
+    .container
+        background: blue
+        width: 90%
+
+    
+    .slick-prev 
+        left: 20px
+        z-index: 10
+        [dir="rtl"] & 
+            left: auto
+            right: 20px
+            
+
+    .slick-next 
+        right: 20px
+        [dir="rtl"] & 
+            left: 20px
+            right: auto
+            
+    
+            
+
+
+@media #{$media-mobile-sm}
+    .container
+        background: yellow
+        width: calc(100% - 1rem)
+
+    .border-primary
+        padding: 0 10px 

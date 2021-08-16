@@ -4,7 +4,7 @@ import RiwayatKelas from '../containers/RiwayatKelas';
 import RiwayatSoal from '../containers/RiwayatSoal';
 
 export default function Profile () {
-    const [activeTab, setActiveTab] = useState(0)
+    const [activeTab, setActiveTab] = useState(1)
 
     const openTab = (index) => {
         setActiveTab(index)
@@ -23,7 +23,7 @@ export default function Profile () {
     }
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-5 mb-5">
             <h3 className="pb-5 center">Profilku</h3>
             
             <div className="tab-container">

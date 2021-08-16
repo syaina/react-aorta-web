@@ -25,23 +25,24 @@ body
     color: $black
 
 header
-    margin: 24px auto 
-    display: grid
-    grid-template-columns: 150px 1fr auto
-    grid-template-rows: 1fr
-    max-width: 1280px
-    font-weight: 600
+    .web-menu
+        margin: 24px auto 
+        display: grid
+        grid-template-columns: 150px 1fr auto
+        grid-template-rows: 1fr
+        max-width: 1280px
+        font-weight: 600
 
-    ul 
-        display: flex
-        flex-direction: columns
+        ul 
+            display: flex
+            flex-direction: columns
 
-        li
-            justify-content: space-around
-            list-style: none
-            padding: 0 16px
-            line-height: 39px
-            vertical-align: middle
+            li
+                justify-content: space-around
+                list-style: none
+                padding: 0 16px
+                line-height: 39px
+                vertical-align: middle
 a
     text-decoration: none
     color: inherit
@@ -53,6 +54,9 @@ a
     border-radius: 20px
     font-size: $font-sm
     font-weight: 600
+
+    &:hover
+        background: darken($primary, 10%)
 
 .grid
     display: grid

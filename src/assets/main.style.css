@@ -402,7 +402,7 @@ body {
   color: #292929;
 }
 
-header {
+header .web-menu {
   margin: 24px auto;
   display: -ms-grid;
   display: grid;
@@ -414,7 +414,7 @@ header {
   font-weight: 600;
 }
 
-header ul {
+header .web-menu ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -424,7 +424,7 @@ header ul {
           flex-direction: columns;
 }
 
-header ul li {
+header .web-menu ul li {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   list-style: none;
@@ -445,6 +445,10 @@ a {
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+.link-btn:hover {
+  background: #ffbc06;
 }
 
 .grid {
@@ -899,6 +903,64 @@ input#input-files {
   margin: auto;
 }
 
+@media only screen and (max-width: 1024px) {
+  .container {
+    width: calc(100% - 5rem);
+    margin: auto;
+  }
+  .web-menu {
+    font-size: 0.875rem;
+    margin: 24px;
+  }
+  .title, .title-sub {
+    text-align: center;
+  }
+  footer {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    background: violet;
+  }
+  .web-menu {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    background: blue;
+    width: 90%;
+  }
+  .slick-prev {
+    left: 20px;
+    z-index: 10;
+  }
+  [dir="rtl"] .slick-prev {
+    left: auto;
+    right: 20px;
+  }
+  .slick-next {
+    right: 20px;
+  }
+  [dir="rtl"] .slick-next {
+    left: 20px;
+    right: auto;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .container {
+    background: yellow;
+    width: calc(100% - 1rem);
+  }
+  .border-primary {
+    padding: 0 10px;
+  }
+}
+
 .tab-container {
   display: -ms-grid;
   display: grid;
@@ -944,7 +1006,8 @@ input#input-files {
 }
 
 .text-field-container label {
-  margin-bottom: 5px;
+  margin-bottom: 3px;
+  font-size: 0.875rem;
 }
 
 .text-field-container input {
@@ -952,7 +1015,7 @@ input#input-files {
   font-family: inherit;
   font-size: inherit;
   border: 1px solid #ffca39;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .text-field-container label + input {

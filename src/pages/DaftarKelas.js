@@ -29,7 +29,7 @@ export default function DaftarKelas() {
                 alertError ? <Alert variant="filled" severity="error">Email atau password salah</Alert> : ""
             }
 
-            <div className="center mt-5">
+            <div className="center mt-5 container ">
                 <div className="bg-white border-primary py-5 width-auto">
                     <h3 className="font-secondary font-color-black font-weight-normal">Booking Kelas</h3>
                     {/* <FormBooking parentCallback = {callback} /> */}

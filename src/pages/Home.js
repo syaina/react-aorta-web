@@ -11,62 +11,10 @@ import Footer from '../components/Footer';
 
 export default function Home () {
     const [materi, setMateri] = useState([])
-    const [soal, setSoal] = useState([])
+    const [produk, setProduk] = useState([])
+    const [testimoni, setTestimoni] = useState([])
 
     useEffect(() => {
-        const getSoal = axios.get('/soal/bab/BAB-000001')
-        getSoal
-        .then((response) => {
-            if(response.status == 200) {
-                let respSoal = [];
-                
-                response.data.results.map((result) => {
-                    respSoal.push({
-                        id: result.id,
-                        id_materi: result.id_materi,
-                        id_bab: result.id_bab,
-                        id_soal: result.id_soal,
-                        soal: result.soal,
-                        url_gambar: result.url_gambar,
-                        jawaban: result.jawaban,
-                        pembahasan: result.pembahasan,
-                        option: [
-                          { 
-                            opt: result.pil1,
-                            selected: false,
-                            correctAnswer: result.jawaban === "a" ? true : false
-                          },
-                          {
-                            opt: result.pil2,
-                            selected: false,
-                            correctAnswer: result.jawaban === "b" ? true : false
-                          },
-                          {
-                            opt: result.pil3,
-                            selected:false,
-                            correctAnswer: result.jawaban === "c" ? true : false
-                          },
-                          {
-                            opt: result.pil4,
-                            selected:false,
-                            correctAnswer: result.jawaban === "d" ? true : false
-                          },
-                          {
-                            opt: result.pil5,
-                            selected:false,
-                            correctAnswer: result.jawaban === "e" ? true : false
-                          }
-                        ]
-                    });
-                });
-
-                setSoal(respSoal);
-            }
-            
-        })
-        .catch(function (error) {
-        })
-
         //get Materi 
         const getMateri = axios.get('/materi')
         getMateri
@@ -90,6 +38,50 @@ export default function Home () {
         getMateri.catch(function (error) {
         });
 
+        //get Produk
+        const getProduk = axios.get('/produk')
+        getProduk
+        .then((response) => {
+            if (response.status === 200) {
+                let respProduk = [];
+
+                response.data.results.map((result) => {
+                    respProduk.push({
+                        id: result.id,
+                        id_produk: result.id_materi,
+                        produk: result.produk,
+                        url_gambar: result.url_gambar
+                    });
+                });
+                setProduk(respProduk);
+            } 
+            
+        })
+        getProduk.catch(function (error) {
+        });
+
+         //get Testimoni
+        const getTestimoni = axios.get('/testimoni')
+        getTestimoni
+        .then((response) => {
+            if (response.status === 200) {
+                let respTestimoni = [];
+
+                response.data.results.map((result) => {
+                    respTestimoni.push({
+                        id: result.id,
+                        id_testimoni: result.id_testimoni,
+                        testimoni: result.testimoni,
+                        url_gambar: result.url_gambar
+                    });
+                });
+                setTestimoni(respTestimoni);
+            } 
+            
+        })
+        getTestimoni.catch(function (error) {
+        });
+
 
     }, [])
 
@@ -97,14 +89,14 @@ export default function Home () {
         <div>
             <div className="container">
                 <Grid container spacing={9}>
-                    <Grid item sm={12} md={6}>
+                    <Grid item sm={12} md={12} lg={6}>
                         <div className="slider-home">
                             <DisplaySlider />
                         </div>
                     </Grid>
-                    <Grid item sm={12} md={6}>
+                    <Grid item sm={12} md={12} lg={6}>
                         <h1 className="title mt-5">Tentir Aorta</h1>
-                        <h4 className="mb-5 font-grey font-light">make it easy</h4>
+                        <h4 className="mb-5 font-grey font-light title-sub">make it easy</h4>
                         <p className="p-home">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, expedita animi eos voluptatem temporibus doloremque qui sed fugit voluptates, labore vero nulla error esse ipsum adipisci mollitia necessitatibus, eaque suscipit aut! Dicta officia, deleniti ab fugit distinctio aperiam aliquid consequatur, odio id vitae possimus ea incidunt ipsum quae nulla accusantium?</p>
                         <div className="my-5 center">
                             <a className="link-btn link-btn-home" href="/profil-aorta">Know More</a>
@@ -152,60 +144,27 @@ export default function Home () {
             </div>
             <div className="container my-5">
                 <h3 className="center font-primary pt-4 pb-5">Apa kata mereka?</h3>
-                <TestimoniSlider />
+                <TestimoniSlider data={testimoni}/>
             </div>
             <div className="container my-5">
                 <h3 className="center font-secondary pt-4 pb-5">Pesan program kami sekarang</h3>
                 <Grid container spacing={2}>
-                    <Grid item sm={6} md={4} lg={4}>
-                        <div class="card bg-dark-blue">
-                            <div class="card-img-container">
-                                <img src="../images/image-2.jpg" alt="Bab" />
-                            </div>
-                            <p className="font-white">Kelas Anatomi</p>
-                        </div>
-                    </Grid>
-                    <Grid item sm={6} md={4} lg={4}>
-                        <div class="card bg-dark-blue">
-                            <div class="card-img-container">
-                                <img src="../images/image-2.jpg" alt="Bab" />
-                            </div>
-                            <p className="font-white">Kelas Anatomi</p>
-                        </div>
-                    </Grid>
-                    <Grid item sm={6} md={4} lg={4}>
-                        <div class="card bg-dark-blue">
-                            <div class="card-img-container">
-                                <img src="../images/image-2.jpg" alt="Bab" />
-                            </div>
-                            <p className="font-white">Kelas Anatomi</p>
-                        </div>
-                    </Grid>
-                    <Grid item sm={6} md={4} lg={4}>
-                        <div class="card bg-dark-blue">
-                            <div class="card-img-container">
-                                <img src="../images/image-2.jpg" alt="Bab" />
-                            </div>
-                            <p className="font-white">Kelas Anatomi</p>
-                        </div>
-                    </Grid>
-                    <Grid item sm={6} md={4} lg={4}>
-                        <div class="card bg-dark-blue">
-                            <div class="card-img-container">
-                                <img src="../images/image-2.jpg" alt="Bab" />
-                            </div>
-                            <p className="font-white">Kelas Anatomi</p>
-                        </div>
-                    </Grid>
-                    <Grid item sm={6} md={4} lg={4}>
-                        <div class="card bg-dark-blue">
-                            <div class="card-img-container">
-                                <img src="../images/image-2.jpg" alt="Bab" />
-                            </div>
-                            <p className="font-white">Kelas Anatomi</p>
-                        </div>
-                    </Grid>
+                    {
+                        produk.map((item) => 
+                            <Grid item sm={6} md={4} lg={4}>
+                                <div class="card bg-dark-blue">
+                                    <div class="card-img-container">
+                                        <img src={item.url_gambar} alt={item.produk} />
+                                    </div>
+                                    <p className="font-white">{item.produk}</p>
+                                </div>
+                            </Grid>
+                        )
+                    }
                 </Grid>
+                {/* <div className="my-5 center">
+                    <Link className="link-btn" to="/daftar-kelas">Daftar Program Sekarang</Link>
+                </div> */}
             </div>
             <Footer/>
         </div>

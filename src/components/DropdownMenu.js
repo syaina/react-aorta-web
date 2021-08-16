@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Roboto',
     fontWeight: 600,
 
-    '&$hover': {
+    '&hover': {
         background: '#ffca39'
     } 
   }

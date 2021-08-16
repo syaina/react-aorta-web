@@ -3,8 +3,10 @@ import axios from 'axios';
 
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import Spinner from '../components/Spinner';
 
 export default function Materi () {
+    const [loading, setLoading] = useState(true)
     const [materi, setMateri] = useState([])
 
     useEffect(() => {
@@ -26,6 +28,7 @@ export default function Materi () {
                  });
 
                 setMateri(resp);
+                setLoading(false)
             }
             
         })
@@ -34,13 +37,15 @@ export default function Materi () {
         })
     }, [])
 
+    if (loading) return <Spinner/>
+
     return (
         <div className="container mt-5">
             <h3 className="pb-5 center">Materi</h3>
             <Grid container spacing={3}>
                 {
                     materi.map((m) => (
-                        <Grid item sm={6} md={3} lg={3}>
+                        <Grid item xs={12} sm={6} md={3} lg={3}>
                             <Link to={`/latihan-soal/${m.slug}`}>  
                                 <div class="card box-shadow py-3 px-3">
                                     <div class="card-img-container">

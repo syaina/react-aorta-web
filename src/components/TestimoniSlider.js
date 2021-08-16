@@ -30,14 +30,14 @@ function SampleNextArrow(props) {
     );
 }
 
-export default class TestimoniSlider extends Component {
-  render() {
+export default function TestimoniSlider (props) {
+ 
     const settings = {
       dots: false,
       infinite: true,
       speed: 1000,
-      slidesToShow: 4,
-      slidesToScroll: 4,
+      slidesToShow: 2,
+      slidesToScroll: 1,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />
       // autoplay: true,
@@ -48,51 +48,20 @@ export default class TestimoniSlider extends Component {
         <div className="">
             <div className="">
                 <Slider {...settings}>
-                    <div class="testimoni-card-container">
-                        <div className="testimoni-card bg-butterscotch">
-                            <div class="card-img-container" style={{backgroundImage: `url(http://localhost:3000/images/image-2.jpg)`}}>
+                    {
+                        props.data.map((item) => 
+
+                            <div class="testimoni-card-container">
+                                <div className="testimoni-card bg-butterscotch">
+                                    <div class="card-img-container" style={{backgroundImage: `url(${item.url_gambar})`}}>
+                                    </div>
+                                    <p class="font-small">{item.testimoni}</p>
+                                </div>
                             </div>
-                            <p class="font-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, expedita animi eos voluptatem temporibus doloremque qui sed fugit voluptates, labore vero nulla error esse ipsum adipisci mollitia necessitatibus, eaque suscipit aut!</p>
-                        </div>
-                    </div>
-                    <div class="testimoni-card-container">
-                        <div className="testimoni-card bg-butterscotch">
-                            <div class="card-img-container" style={{backgroundImage: `url(http://localhost:3000/images/image-2.jpg)`}}>
-                            </div>
-                            <p class="font-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, expedita animi eos voluptatem temporibus doloremque qui sed fugit voluptates, labore vero nulla error esse ipsum adipisci mollitia necessitatibus, eaque suscipit aut!</p>
-                        </div>
-                    </div>
-                    <div class="testimoni-card-container">
-                        <div className="testimoni-card bg-butterscotch">
-                            <div class="card-img-container" style={{backgroundImage: `url(http://localhost:3000/images/image-2.jpg)`}}>
-                            </div>
-                            <p class="font-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, expedita animi eos voluptatem temporibus doloremque qui sed fugit voluptates, labore vero nulla error esse ipsum adipisci mollitia necessitatibus, eaque suscipit aut!</p>
-                        </div>
-                    </div>
-                    <div class="testimoni-card-container">
-                        <div className="testimoni-card bg-butterscotch">
-                            <div class="card-img-container" style={{backgroundImage: `url(http://localhost:3000/images/image-2.jpg)`}}>
-                            </div>
-                            <p class="font-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, expedita animi eos voluptatem temporibus doloremque qui sed fugit voluptates, labore vero nulla error esse ipsum adipisci mollitia necessitatibus, eaque suscipit aut!</p>
-                        </div>
-                    </div>
-                    <div class="testimoni-card-container">
-                        <div className="testimoni-card bg-butterscotch">
-                            <div class="card-img-container" style={{backgroundImage: `url(http://localhost:3000/images/image-2.jpg)`}}>
-                            </div>
-                            <p class="font-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, expedita animi eos voluptatem temporibus doloremque qui sed fugit voluptates, labore vero nulla error esse ipsum adipisci mollitia necessitatibus, eaque suscipit aut!</p>
-                        </div>
-                    </div>
-                    <div class="testimoni-card-container">
-                        <div className="testimoni-card bg-butterscotch">
-                            <div class="card-img-container" style={{backgroundImage: `url(http://localhost:3000/images/image-2.jpg)`}}>
-                            </div>
-                            <p class="font-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, expedita animi eos voluptatem temporibus doloremque qui sed fugit voluptates, labore vero nulla error esse ipsum adipisci mollitia necessitatibus, eaque suscipit aut!</p>
-                        </div>
-                    </div>
+                        )
+                    }
                 </Slider>
             </div>
         </div>
     );
-  }
 }

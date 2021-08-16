@@ -26,7 +26,7 @@ export default function Login() {
         <div>
             { isAlert ? <AlertMessage severity={severity} message={message}/> : null }
 
-            <div className="center mt-5">
+            <div className="center mt-5 container">
                 <div className="bg-white border-primary py-5 width-auto">
                     <h3 className="font-secondary font-color-black font-weight-normal">Login Akun</h3>
                     <FormLogin parentCallback = {callback} />

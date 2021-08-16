@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Header from '../components/Header';
-import Tes from '../pages/Tes';
 // import Footer from '../components/Footer';
 
 import DaftarKelas from '../pages/DaftarKelas';
@@ -23,7 +22,6 @@ function routes() {
             <div>
                 <Header/>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/tes" component={Tes} />
                 <Route exact path="/daftar" component={Signup} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/profilku" component={Profile} />

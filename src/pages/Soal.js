@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import ConfirmDialog, { confirmDialog } from '../components/ConfirmDialog';
+import Spinner from '../components/Spinner';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,6 +61,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Soal () {
     const {materi, bab} = useParams()
+
+    const [loading, setLoading] = useState(true)
     const [soal, setSoal] = useState([])
     const [judulBab, setJudulBab] = useState()
     const [answer, setAnswer] = useState([])
@@ -151,6 +154,8 @@ export default function Soal () {
                         });
                         setSoal(resp);
                         setAnswer(resp2);
+
+                        setLoading(false);
                     }
                     
                 })
@@ -207,6 +212,8 @@ export default function Soal () {
       });
     }
 
+    if (loading) return <Spinner/>
+
     return (
         <div className="container mt-5">
             <ConfirmDialog backButton="Kembali" confirmButton="Submit" /> 
@@ -222,7 +229,7 @@ export default function Soal () {
                 >
                     {
                         soal.map((data, index) => (
-                            <Tab label={`Pertanyaan ${index+1}`} {...a11yProps({index})} />
+                            <Tab label={`Soal ${index+1}`} {...a11yProps({index})} />
                         ))
                     }
                 </Tabs>
