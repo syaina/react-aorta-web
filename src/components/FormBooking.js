@@ -9,12 +9,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-import AuthService from '../services/auth.service';
-
 const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
         width: '100%',
         minWidth: '120px',
         maxWidth: '350px',
@@ -27,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         width: '100%',
-        margin: theme.spacing(1),
         minWidth: 120,
         maxWidth: 350,
         marginLeft: 'auto',
@@ -37,19 +34,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormBooking({parentCallback}) {
     const classes = useStyles();
-    const [alert, setAlert] = useState("");
     const [products, setProducts] = useState([]);
 
     const [produk, setProduk] = useState();
     const [produkLainnya, setProdukLainnya] = useState("");
     const [noHandphone, setNoHandphone] = useState()
+    const [tanggal, setTanggal] = useState(new Date('2021-08-16T21:11:54'));
 
     const [anotherOption, setAnotherOption] = useState(false);
     
-    const {
-        handleSubmit, 
-        formState: { errors }
-    } = useForm();
 
     useEffect(() => {
         const endpoint = "/produk";
@@ -77,8 +70,9 @@ export default function FormBooking({parentCallback}) {
 
     useEffect(() => {  
         produk === "other" ? setAnotherOption(true) : setAnotherOption(false)
-        parentCallback(produk, noHandphone, produkLainnya)
-    }, [produk, noHandphone, produkLainnya]);
+        parentCallback(produk, noHandphone, produkLainnya, tanggal)
+        console.log(tanggal)
+    }, [produk, noHandphone, produkLainnya, tanggal]);
 
     const showAnotherOption = () => {
         setAnotherOption(true)
@@ -96,41 +90,60 @@ export default function FormBooking({parentCallback}) {
                             value={produk}
                             onChange={(event) => setProduk(event.target.value)}
                             label="Produk"
-                            >
-                                {
-                                    products.map((product) => (
-                                        <MenuItem value={product.id_produk}>{product.produk}</MenuItem>
-                                    
-                                    ))
-                                }
-                                <MenuItem value="other" onSelected={() => showAnotherOption()}>Lainnya</MenuItem>
+                        >
+                            {
+                                products.map((product) => (
+                                    <MenuItem value={product.id_produk}>{product.produk}</MenuItem>
+                                
+                                ))
+                            }
+                            <MenuItem value="other" onSelected={() => showAnotherOption()}>Lainnya</MenuItem>
                         </Select>
-                        
-                        {
-                            anotherOption ?  
-                                <div className="mt-2"> 
-                                    <TextField variant="standard" 
-                                        name="other"
-                                        label="Produk Lain"
-                                        placeholder="Isi Produk Lainnya"
-                                        type="text"
-                                        onChange={(event) => setProdukLainnya(event.target.value)}
-                                        fullWidth
-                                    />
-                                </div>
-                            : null
-                        }
-                       
                     </FormControl>
                 </div>
 
-                <div className="mb-5">
-                    <TextField variant="outlined"
+                {
+                    anotherOption ?  
+                        <div className=""> 
+                            <TextField 
+                                variant="outlined" 
+                                name="other"
+                                label="Produk Lainnya"
+                                type="text"
+                                value={produkLainnya}
+                                onChange={(event) => setProdukLainnya(event.target.value)}
+                                fullWidth
+                            />
+                        </div>
+                    : null
+                }
+
+                <div className="">
+                    <TextField 
+                        variant="outlined"
                         name="no_handphone"
                         label="No. Handphone/WA"
                         type="tel"
+                        value={noHandphone}
                         onChange={(event) => {setNoHandphone(event.target.value)}}
                         fullWidth
+                    />
+                </div>
+
+                <div className="mt-1 mb-5">
+                    <TextField
+                        variant="outlined"
+                        name="tanggal"
+                        label="Tanggal Kelas"
+                        type="date"
+                        id="date"
+                        format="dd/MM/yyyy"
+                        value={tanggal}
+                        onChange={(event) => {setTanggal(event.target.value)}}
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                 </div>
             </form>              
