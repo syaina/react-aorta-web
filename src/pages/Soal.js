@@ -166,7 +166,7 @@ export default function Soal () {
 
     const selectOption = (optionId, selectedId, optionValue) => {
       setSoal(
-        soal.map((item, index) =>
+        soal.map((item) =>
           item.id_soal === selectedId 
             ? {
                 ...item,
@@ -201,7 +201,6 @@ export default function Soal () {
     }
 
     const handleConfirm = () => {
-      console.log(answer)
       history.push({
         pathname: '/latihan-soal-dan-pembahasan',
         state: { answer, soal, correct, judulBab }
@@ -232,9 +231,13 @@ export default function Soal () {
                     soal.map((data, index) => ( 
                         <TabPanel value={value} index={index} class={classes.tabPanel}>
                             <p>{data.soal}</p>
-                            <div className="soal-img-container my-3">
-                              <img src={data.url_gambar} alt="" />
-                            </div>
+                            {
+                              data.url_gambar !== null 
+                              ? <div className="soal-img-container my-3">
+                                <img src={data.url_gambar} alt="" />
+                              </div>
+                              : null
+                            }
                             <div className="option-group mt-2">
                               <input type="radio" name={data.id_soal} id="pil1" value="a" checked={data.option[0].selected} onClick={() => selectOption(0, data.id_soal, "a")} />
                               <label for="pil1">{data.option[0].opt}</label>
@@ -266,13 +269,13 @@ export default function Soal () {
                 }
             </div>
           </form>
-           {
+           {/* {
                 answer.map((item) =>
                   <p>{item.id_soal}, {item.answer}, {item.answerKey}</p>
                   
                 )
             }
-            <p>Correct: {correct}</p>
+            <p>Correct: {correct}</p> */}
         </div>
     )
 }

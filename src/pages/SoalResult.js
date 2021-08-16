@@ -34,9 +34,13 @@ export default function SoalResult ({location}) {
       
                     <div className="mb-5 max-width--sm">
                         <p>{index+1}. {data.soal}</p>
-                        <div className="soal-img-container my-3">
+                        {
+                          data.url_gambar !== null 
+                          ? <div className="soal-img-container my-3">
                             <img src={data.url_gambar} alt="" />
-                        </div>
+                          </div>
+                          : null
+                        }
                         <div className="option-group mt-2">
                             {data.option.map((item) =>
                                 <label className={
